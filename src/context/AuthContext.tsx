@@ -45,7 +45,12 @@ export const AuthProvider = ({children}: any) => {
 
     const signIn = async( {user, password}:User ) => {
         try {
-            const resp = await proximityApi.post<LoginResponse>('/login', { user, password });
+            const resp:any = await proximityApi.post<LoginResponse>('/login', { user, password });
+            const respParse = JSON.parse(resp.data.data)
+            const token = respParse.userToken;
+
+            console.log('token', token)
+
             
             if(resp.data.codeStatus === "0x03" ){
                 return dispatch({ 
@@ -58,7 +63,7 @@ export const AuthProvider = ({children}: any) => {
                 type: 'signUp'
             });
             
-            await AsyncStorage.setItem('token', resp.data.data);
+            await AsyncStorage.setItem('token', token);
 
         } catch (error) {
             console.log(error);

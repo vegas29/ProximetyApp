@@ -19,7 +19,7 @@ export const Navigator = () => {
   return (
     <Stack.Navigator
         screenOptions={{
-            headerShown: false
+          headerShown: false
         }}
     >
 

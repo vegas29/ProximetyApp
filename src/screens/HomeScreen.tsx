@@ -3,18 +3,22 @@ import { ActivityIndicator, FlatList, Image, Pressable, SafeAreaView, ScrollView
 import { homeStyles } from '../theme/homeTheme'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faArrowLeft, faCartShopping, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCartShopping, faChevronRight, faHeart, faLocationDot, faTextHeight, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { MyFacebookLoader } from '../components/UI/MyFacebookLoader';
 import { COLORS } from '../settings/colors';
 import { useProducts } from '../hooks/useProducts';
 import { Header } from '../components/UI/Header';
 import { Footer } from '../components/UI/Footer';
+import { DrawerStackParams } from '../navigator/DrawerNavigation';
+import { StackScreenProps } from '@react-navigation/stack';
 
+interface Props extends StackScreenProps<DrawerStackParams, 'HomeScreen'> {}
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation} : Props) => {
 
-    const { products, isLoading } = useProducts();
+    const { products, isLoading }:any = useProducts();
 
+    console.log('desde', products)
     //FlatList Footer Component
     const renderFooterComponent = () => (
         <View style={homeStyles.activityIndicator}>
@@ -37,8 +41,8 @@ export const HomeScreen = () => {
                     </View>
                 ) : (
                     <View style={homeStyles.containerCards}>
-                        <Text>Aqui va la flatlist</Text>
-                        {/* <FlatList
+
+                        <FlatList
                             data={products}
                             renderItem={({item}) => (
                                 
@@ -48,16 +52,18 @@ export const HomeScreen = () => {
                                     <TouchableOpacity
                                         style={homeStyles.card}
                                         activeOpacity={0.8}
-                                        onPress={ () => navigation.navigate('HeadquarterScreen', {
+                                        onPress={ () => navigation.navigate('ProductScreen', {
                                             id: item._id,
-                                            name: item.name
+                                            title: item.title,
+                                            image: item.image,
+                                            longDescription: item.longDescription
                                         }) }
                                     >
 
-                                        {item?.logo ? (
+                                        {item?.image ? (
                                             <Image
                                                 style={homeStyles.logo}
-                                                source={{ uri: item.logo}}
+                                                source={{ uri: item.image}}
                                             />
                                         ) : (    
                                             <Image
@@ -67,22 +73,10 @@ export const HomeScreen = () => {
                                         )}
                                         <View style={homeStyles.details}>
                                             <View style={homeStyles.detailsText}>
-                                                <Text style={homeStyles.titleCard}>{item.name}</Text>
+                                                <Text style={homeStyles.titleCard}>{item.title}</Text>
                                                 <View style={homeStyles.flexContain}>
-                                                    <FontAwesomeIcon style={homeStyles.iconoStatus} color={item.openOrClose === "Abierto" ? COLORS.GREENLIGHT : COLORS.REDLIGHT } size={20} icon={ faClock }/>
-                                                    {item.openOrClose === "Abierto" ? (
-                                                        <Text style={homeStyles.badgeGreen}>{item.openOrClose}</Text>
-                                                    ) : (
-                                                        <Text style={homeStyles.badgeRed}>{item.openOrClose}</Text>
-                                                    )}
-                                                </View>
-                                                <View style={homeStyles.flexContain}>
-                                                    <FontAwesomeIcon style={homeStyles.iconoCard} size={20} icon={ faUtensils }/>     
-                                                    <Text style={homeStyles.comment} numberOfLines={1}>{item?.allyId.description}</Text>
-                                                </View>
-                                                <View style={homeStyles.flexContain}>
-                                                    <FontAwesomeIcon style={homeStyles.iconoCardSecondary} size={20} icon={ faLocationDot }/>     
-                                                    <Text>{item.directionId}</Text>
+                                                    <FontAwesomeIcon style={homeStyles.iconoCard} size={20} icon={ faTextHeight }/>     
+                                                    <Text style={homeStyles.comment} numberOfLines={3}>{item.shortDescription}</Text>
                                                 </View>
                                             </View>
                                             <View style={homeStyles.flexIcons}>
@@ -93,13 +87,6 @@ export const HomeScreen = () => {
                                                         <FontAwesomeIcon style={homeStyles.iconoAction} color={COLORS.GRAYDARK}  size={20} icon={ faChevronRight }/>
                                                     </Pressable>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity
-                                                    activeOpacity={0.8}
-                                                >
-                                                    <Pressable>
-                                                        <FontAwesomeIcon style={homeStyles.iconoAction} color={COLORS.REDLIGHT} size={20} icon={ faHeart }/>
-                                                    </Pressable>
-                                                </TouchableOpacity>
                                             </View>
                                         </View>
                                     </TouchableOpacity>
@@ -107,7 +94,15 @@ export const HomeScreen = () => {
                             )}
                             ListFooterComponent={renderFooterComponent}
                             keyExtractor={item => item._id}
-                        /> */}
+                        />
+
+                        {products.map((product:any) => (
+                            <Text>{product.title}</Text>
+                        ))}
+
+                        <Text>
+                            {JSON.stringify(products, null, 5)}
+                        </Text>
                     </View>
                 )}
 

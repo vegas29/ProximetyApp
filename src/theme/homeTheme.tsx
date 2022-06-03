@@ -61,7 +61,7 @@ export const homeStyles = StyleSheet.create({
         color: COLORS.WHITE
     },
     containerCards:{
-        height: '90%',
+        height: '100%',
         marginHorizontal: 30
     },
     card:{
