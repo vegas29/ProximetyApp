@@ -1,0 +1,20 @@
+export const COLORS = {
+    PRIMARY: "#3b0b65",
+    PRIMARYLIGHT: "#6314A8",
+    PRIMARYDARK: "#390864",
+    PRIMARYLIGHT2: "#7A38BC",
+    SECONDARY: "#00FBC3",
+    WHITE: "#FFFFFF",
+    BLACK: "#000000",
+    GRAY: "#F2F3F2",
+    GRAYDARK: "#c3c3c3",
+    GRAYLIGHT: "#CEC3D7",
+    GREEN: "#00A04D",
+    GREENLIGHT: "#8cc63f",
+    YELLOW: "#FFF3CD",
+    RED: "#D62A2A",
+    REDLIGHT: "#f51f57",
+    REDPRIMARY: "#CC0326",
+    REDPRIMARYDARK: '#92010F'
+  }
+  
