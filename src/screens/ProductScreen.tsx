@@ -11,6 +11,7 @@ interface Props extends StackScreenProps <DrawerStackParams, 'ProductScreen'>{};
 export const ProductScreen = ({ route } : Props) => {
 
     const {id, title, image, longDescription} = route.params;
+    
     return (
         <SafeAreaView
             style={productStyles.containerMain}

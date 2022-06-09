@@ -2,8 +2,6 @@ import { User } from "../interfaces/appInterfaces";
 
 export interface AuthState {
     status: 'checking' | 'authenticated' | 'not-authenticated';
-    //El token ya viene en User
-    // token: string | null;
     errorMessage: string;
     user: User | null;
 }

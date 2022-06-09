@@ -96,13 +96,13 @@ export const HomeScreen = ({navigation} : Props) => {
                             keyExtractor={item => item._id}
                         />
 
-                        {products.map((product:any) => (
+                        {/* {products.map((product:any) => (
                             <Text>{product.title}</Text>
                         ))}
 
                         <Text>
                             {JSON.stringify(products, null, 5)}
-                        </Text>
+                        </Text> */}
                     </View>
                 )}
 
